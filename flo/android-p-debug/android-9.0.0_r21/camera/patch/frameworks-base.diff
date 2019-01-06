@@ -1,0 +1,29 @@
+diff --git a/core/java/android/hardware/camera2/params/StreamConfigurationMap.java b/core/java/android/hardware/camera2/params/StreamConfigurationMap.java
+index 00e047db98c..c97710f093b 100644
+--- a/core/java/android/hardware/camera2/params/StreamConfigurationMap.java
++++ b/core/java/android/hardware/camera2/params/StreamConfigurationMap.java
+@@ -108,6 +108,24 @@ public final class StreamConfigurationMap {
+         } else {
+             mConfigurations = checkArrayElementsNotNull(configurations, "configurations");
+             mMinFrameDurations = checkArrayElementsNotNull(minFrameDurations, "minFrameDurations");
++            if (stallDurations == null) {
++                // get config from flo android N image (base android-7.0.0_r15)
++                stallDurations = new StreamConfigurationDuration[14];
++                stallDurations[0] = new StreamConfigurationDuration(33, 2592, 1944, 557758208);
++                stallDurations[1] = new StreamConfigurationDuration(33, 2048, 1536, 423346688);
++                stallDurations[2] = new StreamConfigurationDuration(33, 1920, 1080, 347225600);
++                stallDurations[3] = new StreamConfigurationDuration(33, 1600, 1200, 336320000);
++                stallDurations[4] = new StreamConfigurationDuration(33, 1280, 768, 269795840);
++                stallDurations[5] = new StreamConfigurationDuration(33, 1280, 720, 265433600);
++                stallDurations[6] = new StreamConfigurationDuration(33, 1024, 768, 255836672);
++                stallDurations[7] = new StreamConfigurationDuration(33, 800, 600, 234080000);
++                stallDurations[8] = new StreamConfigurationDuration(33, 800, 480, 227264000);
++                stallDurations[9] = new StreamConfigurationDuration(33, 720, 480, 224537600);
++                stallDurations[10] = new StreamConfigurationDuration(33, 640, 480, 221811200);
++                stallDurations[11] = new StreamConfigurationDuration(33, 352, 288, 207197696);
++                stallDurations[12] = new StreamConfigurationDuration(33, 320, 240, 205452800);
++                stallDurations[13] = new StreamConfigurationDuration(33, 176, 144, 201799424);
++            }
+             mStallDurations = checkArrayElementsNotNull(stallDurations, "stallDurations");
+         }
+ 

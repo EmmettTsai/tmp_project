@@ -1,0 +1,12 @@
+diff --git a/camera/provider/2.4/default/ExternalCameraProvider.cpp b/camera/provider/2.4/default/ExternalCameraProvider.cpp
+index a4046d09..ad29a8dc 100644
+--- a/camera/provider/2.4/default/ExternalCameraProvider.cpp
++++ b/camera/provider/2.4/default/ExternalCameraProvider.cpp
+@@ -164,6 +164,7 @@ void ExternalCameraProvider::addExternalCamera(const char* devName) {
+ }
+ 
+ void ExternalCameraProvider::deviceAdded(const char* devName) {
++    return;
+     {
+         base::unique_fd fd(::open(devName, O_RDWR));
+         if (fd.get() < 0) {

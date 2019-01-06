@@ -1,0 +1,28 @@
+diff --git a/src/com/android/camera/util/ExifUtil.java b/src/com/android/camera/util/ExifUtil.java
+index 18150a0c8..85e7953db 100644
+--- a/src/com/android/camera/util/ExifUtil.java
++++ b/src/com/android/camera/util/ExifUtil.java
+@@ -161,6 +161,7 @@ public class ExifUtil {
+         Float focalLength = result.get(CaptureResult.LENS_FOCAL_LENGTH);
+         addExifTag(ExifInterface.TAG_FOCAL_LENGTH, rational(focalLength, FOCAL_LENGTH_PRECISION));
+ 
++/*
+         // Flash mode
+         Integer flashMode = result.get(CaptureResult.FLASH_MODE);
+         if (flashMode == CaptureResult.FLASH_MODE_OFF) {
+@@ -168,6 +169,7 @@ public class ExifUtil {
+         } else {
+             addExifTag(ExifInterface.TAG_FLASH, ExifInterface.Flash.FIRED);
+         }
++*/
+ 
+         // White balance
+         Integer whiteBalanceMode = result.get(CaptureResult.CONTROL_AWB_MODE);
+@@ -176,7 +178,6 @@ public class ExifUtil {
+         } else {
+             addExifTag(ExifInterface.TAG_WHITE_BALANCE, ExifInterface.WhiteBalance.AUTO);
+         }
+-
+     }
+ 
+     private void addExifTag(int tagId, Object val) {

@@ -1,0 +1,175 @@
+============================================
+--------- switch to main
+01-05 22:08:40.449   239   442 E CamPvdr@2.4-external: deviceAdded open v4l2 device /dev/video0 failed:Device or resource busy
+01-05 22:08:40.451   253   253 E mm-camera-sensor: module_sensor_start_session:376 session 2
+--------- switch to kernel
+01-05 22:08:40.471     0     0 W         : [1216][gpio_request] EMMETT gpio = 4, label = CAMIF_MCLK
+...
+--------- switch to main
+01-05 22:08:56.676   724   724 E mm-camera-sensor: module_sensor_start_session:376 session 2
+01-05 22:08:56.686   724   724 E mm-camera-sensor: sensor_power_up:139 failed
+01-05 22:08:56.686   724   724 E mm-camera-sensor: sensor_init:219 failed
+01-05 22:08:56.686   724   724 E mm-camera-sensor: module_sensor_init_session:231 failed rc -5
+--------- switch to crash
+01-05 22:08:56.686   724   724 F libc    : Fatal signal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr 0x0 in tid 724 (mm-qcamera-daem), pid 724 (mm-qcamera-daem)
+--------- switch to kernel
+01-05 22:08:56.693     0     0 W         : [1216][gpio_request] EMMETT gpio = 4, label = CAMIF_MCLK
+--------- switch to kernel
+01-05 22:08:56.693     0     0 W         : [1216][gpio_request] EMMETT gpio = 4, label = CAMIF_MCLK
+01-05 22:08:56.694     0     0 W         : [<c0014ee0>] (unwind_backtrace+0x0/0x134) from [<c03861c8>] (gpio_request+0x138/0x180)
+01-05 22:08:56.694     0     0 W         : [<c03861c8>] (gpio_request+0x138/0x180) from [<c0386b44>] (gpio_request_one+0x14/0xc4)
+01-05 22:08:56.694     0     0 W         : [<c0386b44>] (gpio_request_one+0x14/0xc4) from [<c0386c2c>] (gpio_request_array+0x38/0x68)
+01-05 22:08:56.694     0     0 W         : [<c0386c2c>] (gpio_request_array+0x38/0x68) from [<c05e7d94>] (msm_camera_request_gpio_table+0x78/0x100)
+01-05 22:08:56.694     0     0 W         : [<c05e7d94>] (msm_camera_request_gpio_table+0x78/0x100) from [<c05ed0b4>] (msm_sensor_power_up+0x30/0x5bc)
+01-05 22:08:56.694     0     0 W         : [<c05ed0b4>] (msm_sensor_power_up+0x30/0x5bc) from [<c05eed3c>] (mi1040_sensor_config+0x3a0/0x5e4)
+01-05 22:08:56.694     0     0 W         : [<c05eed3c>] (mi1040_sensor_config+0x3a0/0x5e4) from [<c05ee074>] (msm_sensor_subdev_ioctl+0x58/0xbc)
+01-05 22:08:56.695     0     0 W         : [<c05ee074>] (msm_sensor_subdev_ioctl+0x58/0xbc) from [<c06137a0>] (subdev_do_ioctl+0x358/0x544)
+01-05 22:08:56.695     0     0 W         : [<c06137a0>] (subdev_do_ioctl+0x358/0x544) from [<c060d30c>] (video_usercopy+0x254/0x57c)
+01-05 22:08:56.695     0     0 W         : [<c060d30c>] (video_usercopy+0x254/0x57c) from [<c0607af8>] (v4l2_ioctl+0x9c/0x150)
+01-05 22:08:56.695     0     0 W         : [<c0607af8>] (v4l2_ioctl+0x9c/0x150) from [<c0169fe0>] (do_vfs_ioctl+0x3f8/0x5ac)
+01-05 22:08:56.695     0     0 W         : [<c0169fe0>] (do_vfs_ioctl+0x3f8/0x5ac) from [<c016a200>] (sys_ioctl+0x6c/0x7c)
+01-05 22:08:56.695     0     0 W         : [<c016a200>] (sys_ioctl+0x6c/0x7c) from [<c000ef00>] (ret_fast_syscall+0x0/0x30)
+01-05 22:08:56.695     0     0 D gpio_request: gpio-4 (CAMIF_MCLK) status -16
+01-05 22:08:56.695     0     0 E msm_camera_request_gpio_table: 562 camera gpio request failed
+01-05 22:08:56.696     0     0 E msm_sensor_power_up: request gpio failed
+--------- switch to crash
+01-05 22:08:56.732  1407  1407 F DEBUG   : *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+01-05 22:08:56.732  1407  1407 F DEBUG   : Build fingerprint: 'google/razor/flo:6.0.1/MOB30X/3036618:user/release-keys'
+01-05 22:08:56.732  1407  1407 F DEBUG   : Revision: '0'
+01-05 22:08:56.732  1407  1407 F DEBUG   : ABI: 'arm'
+01-05 22:08:56.732  1407  1407 F DEBUG   : pid: 724, tid: 724, name: mm-qcamera-daem  >>> /system/bin/mm-qcamera-daemon <<<
+01-05 22:08:56.732  1407  1407 F DEBUG   : signal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr 0x0
+01-05 22:08:56.732  1407  1407 F DEBUG   : Cause: null pointer dereference
+01-05 22:08:56.732  1407  1407 F DEBUG   :     r0  00000000  r1  b38d5589  r2  00000000  r3  00000002
+01-05 22:08:56.733  1407  1407 F DEBUG   :     r4  b34ce160  r5  bea8c56c  r6  b3498110  r7  000000e7
+01-05 22:08:56.733  1407  1407 F DEBUG   :     r8  00000008  r9  00000007  r10 bea8c870  r11 00000008
+01-05 22:08:56.733  1407  1407 F DEBUG   :     ip  000000e7  sp  bea8c560  lr  b38cf421  pc  b38d55b4
+01-05 22:08:56.737  1407  1407 F DEBUG   : 
+01-05 22:08:56.737  1407  1407 F DEBUG   : backtrace:
+01-05 22:08:56.737  1407  1407 F DEBUG   :     #00 pc 0000a5b4  /system/vendor/lib/libmmcamera2_sensor_modules.so
+01-05 22:08:56.737  1407  1407 F DEBUG   :     #01 pc 0000441f  /system/vendor/lib/libmmcamera2_sensor_modules.so
+01-05 22:08:56.737  1407  1407 F DEBUG   :     #02 pc 00002935  /system/vendor/lib/liboemcamera.so
+01-05 22:08:56.737  1407  1407 F DEBUG   :     #03 pc 00004907  /system/vendor/lib/liboemcamera.so (mct_list_traverse+22)
+01-05 22:08:56.737  1407  1407 F DEBUG   :     #04 pc 00003db9  /system/vendor/lib/liboemcamera.so (mct_pipeline_start_session+16)
+01-05 22:08:56.738  1407  1407 F DEBUG   :     #05 pc 0000251d  /system/vendor/lib/liboemcamera.so (mct_controller_new+48)
+01-05 22:08:56.738  1407  1407 F DEBUG   :     #06 pc 0000164b  /system/bin/mm-qcamera-daemon
+01-05 22:08:56.738  1407  1407 F DEBUG   :     #07 pc 00001201  /system/bin/mm-qcamera-daemon (main+516)
+01-05 22:08:56.738  1407  1407 F DEBUG   :     #08 pc 0008bf99  /system/lib/libc.so (__libc_init+48)
+01-05 22:08:56.738  1407  1407 F DEBUG   :     #09 pc 00001448  /system/bin/mm-qcamera-daemon
+--------------------------------------------
+flo:/ # cat /sys/kernel/debug/gpio | grep CAM
+ gpio-4   (CAMIF_MCLK          ) in  lo
+gpio-194 (CAM_RESET   ) out        hi 0x05 0x19 0x2a 0x34 0x42 0x58
+============================================
+01-05 22:08:40.445     0     0 W         : [1276][gpio_free] EMMETT gpio = 4
+
+01-05 22:08:40.449   239   442 E CamPvdr@2.4-external: deviceAdded open v4l2 device /dev/video0 failed:Device or resource busy
+01-05 22:08:40.451   253   253 E mm-camera-sensor: module_sensor_start_session:376 session 2
+--------- switch to kernel
+01-05 22:08:40.471     0     0 W         : [1216][gpio_request] EMMETT gpio = 4, label = CAMIF_MCLK
+--------------------------------------------
+hardware/interfaces
+diff --git a/camera/provider/2.4/default/ExternalCameraProvider.cpp b/camera/provider/2.4/default/ExternalCameraProvider.cpp
+index a4046d09..ad29a8dc 100644
+--- a/camera/provider/2.4/default/ExternalCameraProvider.cpp
++++ b/camera/provider/2.4/default/ExternalCameraProvider.cpp
+@@ -164,6 +164,7 @@ void ExternalCameraProvider::addExternalCamera(const char* devName) {
+ }
+ 
+ void ExternalCameraProvider::deviceAdded(const char* devName) {
++    return;
+     {
+         base::unique_fd fd(::open(devName, O_RDWR));
+         if (fd.get() < 0) {
+============================================
+01-05 22:18:34.983  1321  2527 E CAM_OneCamCharImpl: java.lang.NullPointerException: stallDurations must not be null
+01-05 22:18:34.983  1321  2527 E CAM_OneCamCharImpl:    at com.android.internal.util.Preconditions.checkArrayElementsNotNull(Preconditions.java:395)
+01-05 22:18:34.983  1321  2527 E CAM_OneCamCharImpl:    at android.hardware.camera2.params.StreamConfigurationMap.<init>(StreamConfigurationMap.java:111)
+01-05 22:18:34.983  1321  2527 E CAM_OneCamCharImpl:    at android.hardware.camera2.impl.CameraMetadataNative.getStreamConfigurationMap(CameraMetadataNative.java:937)
+01-05 22:18:34.983  1321  2527 E CAM_OneCamCharImpl:    at android.hardware.camera2.impl.CameraMetadataNative.access$400(CameraMetadataNative.java:78)
+01-05 22:18:34.983  1321  2527 E CAM_OneCamCharImpl:    at android.hardware.camera2.impl.CameraMetadataNative$5.getValue(CameraMetadataNative.java:570)
+01-05 22:18:34.983  1321  2527 E CAM_OneCamCharImpl:    at android.hardware.camera2.impl.CameraMetadataNative.get(CameraMetadataNative.java:402)
+01-05 22:18:34.983  1321  2527 E CAM_OneCamCharImpl:    at android.hardware.camera2.impl.CameraMetadataNative.get(CameraMetadataNative.java:373)
+01-05 22:18:34.983  1321  2527 E CAM_OneCamCharImpl:    at android.hardware.camera2.CameraCharacteristics.get(CameraCharacteristics.java:223)
+01-05 22:18:34.983  1321  2527 E CAM_OneCamCharImpl:    at com.android.camera.one.v2.OneCameraCharacteristicsImpl.getSupportedPictureSizes(OneCameraCharacteristicsImpl.java:63)
+01-05 22:18:34.983  1321  2527 E CAM_OneCamCharImpl:    at com.android.camera.one.v2.common.PictureSizeCalculator.computeConfiguration(PictureSizeCalculator.java:148)
+01-05 22:18:34.983  1321  2527 E CAM_OneCamCharImpl:    at com.android.camera.one.v2.OneCameraCreator.create(OneCameraCreator.java:99)
+01-05 22:18:34.983  1321  2527 E CAM_OneCamCharImpl:    at com.android.camera.one.v2.Camera2OneCameraOpenerImpl$1.onOpened(Camera2OneCameraOpenerImpl.java:167)
+01-05 22:18:34.983  1321  2527 E CAM_OneCamCharImpl:    at android.hardware.camera2.impl.CameraDeviceImpl$1.run(CameraDeviceImpl.java:143)
+01-05 22:18:34.983  1321  2527 E CAM_OneCamCharImpl:    at android.os.Handler.handleCallback(Handler.java:873)
+01-05 22:18:34.983  1321  2527 E CAM_OneCamCharImpl:    at android.os.Handler.dispatchMessage(Handler.java:99)
+01-05 22:18:34.983  1321  2527 E CAM_OneCamCharImpl:    at android.os.Looper.loop(Looper.java:193)
+--------------------------------------------
+diff --git a/core/java/android/hardware/camera2/params/StreamConfigurationMap.java b/core/java/android/hardware/camera2/params/StreamConfigurationMap.java
+index 00e047db98c..c97710f093b 100644
+--- a/core/java/android/hardware/camera2/params/StreamConfigurationMap.java
++++ b/core/java/android/hardware/camera2/params/StreamConfigurationMap.java
+@@ -108,6 +108,24 @@ public final class StreamConfigurationMap {
+         } else {
+             mConfigurations = checkArrayElementsNotNull(configurations, "configurations");
+             mMinFrameDurations = checkArrayElementsNotNull(minFrameDurations, "minFrameDurations");
++            if (stallDurations == null) {
++                // get config from flo android N image (base android-7.0.0_r15)
++                stallDurations = new StreamConfigurationDuration[14];
++                stallDurations[0] = new StreamConfigurationDuration(33, 2592, 1944, 557758208);
++                stallDurations[1] = new StreamConfigurationDuration(33, 2048, 1536, 423346688);
++                stallDurations[2] = new StreamConfigurationDuration(33, 1920, 1080, 347225600);
++                stallDurations[3] = new StreamConfigurationDuration(33, 1600, 1200, 336320000);
++                stallDurations[4] = new StreamConfigurationDuration(33, 1280, 768, 269795840);
++                stallDurations[5] = new StreamConfigurationDuration(33, 1280, 720, 265433600);
++                stallDurations[6] = new StreamConfigurationDuration(33, 1024, 768, 255836672);
++                stallDurations[7] = new StreamConfigurationDuration(33, 800, 600, 234080000);
++                stallDurations[8] = new StreamConfigurationDuration(33, 800, 480, 227264000);
++                stallDurations[9] = new StreamConfigurationDuration(33, 720, 480, 224537600);
++                stallDurations[10] = new StreamConfigurationDuration(33, 640, 480, 221811200);
++                stallDurations[11] = new StreamConfigurationDuration(33, 352, 288, 207197696);
++                stallDurations[12] = new StreamConfigurationDuration(33, 320, 240, 205452800);
++                stallDurations[13] = new StreamConfigurationDuration(33, 176, 144, 201799424);
++            }
+             mStallDurations = checkArrayElementsNotNull(stallDurations, "stallDurations");
+         }
+ 
+============================================
+01-05 23:58:32.320  7022  7364 E AndroidRuntime: FATAL EXCEPTION: Thread-4
+01-05 23:58:32.320  7022  7364 E AndroidRuntime: Process: com.android.camera2, PID: 7022
+01-05 23:58:32.320  7022  7364 E AndroidRuntime: java.lang.NullPointerException: Attempt to invoke virtual method 'int java.lang.Integer.intValue()' on a null object reference
+01-05 23:58:32.320  7022  7364 E AndroidRuntime: 	at com.android.camera.util.ExifUtil.addCaptureResultToExif(ExifUtil.java:166)
+01-05 23:58:32.320  7022  7364 E AndroidRuntime: 	at com.android.camera.util.ExifUtil.populateExif(ExifUtil.java:67)
+01-05 23:58:32.320  7022  7364 E AndroidRuntime: 	at com.android.camera.processing.imagebackend.TaskCompressImageToJpeg.createExif(TaskCompressImageToJpeg.java:409)
+01-05 23:58:32.320  7022  7364 E AndroidRuntime: 	at com.android.camera.processing.imagebackend.TaskCompressImageToJpeg.run(TaskCompressImageToJpeg.java:341)
+01-05 23:58:32.320  7022  7364 E AndroidRuntime: 	at com.android.camera.processing.imagebackend.ImageBackend$TaskDoneWrapper.run(ImageBackend.java:829)
+01-05 23:58:32.320  7022  7364 E AndroidRuntime: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+01-05 23:58:32.320  7022  7364 E AndroidRuntime: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+01-05 23:58:32.320  7022  7364 E AndroidRuntime: 	at java.lang.Thread.run(Thread.java:764)
+01-05 23:58:32.320  7022  7364 E AndroidRuntime: 	at com.android.camera.async.AndroidPriorityThread.run(AndroidPriorityThread.java:26)
+--------------------------------------------
+src/com/android/camera/util/ExifUtil.java 
+diff --git a/src/com/android/camera/util/ExifUtil.java b/src/com/android/camera/util/ExifUtil.java
+index 18150a0c8..85e7953db 100644
+--- a/src/com/android/camera/util/ExifUtil.java
++++ b/src/com/android/camera/util/ExifUtil.java
+@@ -161,6 +161,7 @@ public class ExifUtil {
+         Float focalLength = result.get(CaptureResult.LENS_FOCAL_LENGTH);
+         addExifTag(ExifInterface.TAG_FOCAL_LENGTH, rational(focalLength, FOCAL_LENGTH_PRECISION));
+ 
++/*
+         // Flash mode
+         Integer flashMode = result.get(CaptureResult.FLASH_MODE);
+         if (flashMode == CaptureResult.FLASH_MODE_OFF) {
+@@ -168,6 +169,7 @@ public class ExifUtil {
+         } else {
+             addExifTag(ExifInterface.TAG_FLASH, ExifInterface.Flash.FIRED);
+         }
++*/
+ 
+         // White balance
+         Integer whiteBalanceMode = result.get(CaptureResult.CONTROL_AWB_MODE);
+@@ -176,7 +178,6 @@ public class ExifUtil {
+         } else {
+             addExifTag(ExifInterface.TAG_WHITE_BALANCE, ExifInterface.WhiteBalance.AUTO);
+         }
+-
+     }
+ 
+     private void addExifTag(int tagId, Object val) {
+============================================
